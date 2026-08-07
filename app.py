@@ -16,7 +16,7 @@ st.title("🇵🇭 Philippine Barangay Spatial Locator")
 st.markdown(
     """
     Enter a single coordinate or upload a CSV/XLSX file containing multiple coordinates 
-    to identify their corresponding **Barangay, City, Province, and Region** using your GeoJSON dataset.
+    to identify their corresponding **Barangay, City, Province, and Region**.
     """
 )
 
