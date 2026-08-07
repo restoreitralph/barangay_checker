@@ -222,4 +222,4 @@ if not results_df.empty:
     )
 
 else:
-st.info("Input a coordinate or upload a file to view tabular results.")
+    st.info("Input a coordinate or upload a file to view tabular results.")
