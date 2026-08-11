@@ -12,7 +12,7 @@ from streamlit_folium import st_folium
 # ==================================================
 
 st.set_page_config(
-    page_title="PH Barangay Coordinate Locator",
+    page_title="PH Barangay Spatial Locator",
     layout="wide"
 )
 
@@ -36,6 +36,9 @@ if "results_df" not in st.session_state:
 if "markers_to_plot" not in st.session_state:
     st.session_state.markers_to_plot = []
 
+if "batch_processed" not in st.session_state:
+    st.session_state.batch_processed = False
+
 # ==================================================
 # LOAD BARANGAY DATA
 # ==================================================
@@ -49,6 +52,7 @@ def load_barangay_data():
         gdf = gdf.to_crs("EPSG:4326")
 
     return gdf
+
 
 with st.spinner("Loading Philippine boundary data... Please wait."):
     brgy_gdf = load_barangay_data()
@@ -77,13 +81,13 @@ if input_mode == "Single Coordinate":
 
     lat = st.sidebar.number_input(
         "Latitude",
-        value=14.5995,
+        value=14.599500,
         format="%.6f"
     )
 
     lon = st.sidebar.number_input(
         "Longitude",
-        value=120.9842,
+        value=120.984200,
         format="%.6f"
     )
 
@@ -140,6 +144,9 @@ else:
         type=["csv", "xlsx"]
     )
 
+    if uploaded_file is None:
+        st.session_state.batch_processed = False
+
     if uploaded_file is not None:
 
         if uploaded_file.name.endswith(".csv"):
@@ -147,8 +154,12 @@ else:
         else:
             input_df = pd.read_excel(uploaded_file)
 
-        st.write("Preview of Uploaded Data")
-        st.dataframe(input_df.head())
+        if not st.session_state.batch_processed:
+            st.write("Preview of Uploaded Data")
+            st.dataframe(
+                input_df.head(),
+                use_container_width=True
+            )
 
         lat_col = st.sidebar.selectbox(
             "Select Latitude Column",
@@ -161,6 +172,8 @@ else:
         )
 
         if st.sidebar.button("Process Batch"):
+
+            st.session_state.batch_processed = True
 
             with st.spinner("Performing spatial lookup..."):
 
@@ -230,7 +243,7 @@ markers_to_plot = st.session_state.markers_to_plot
 # MAP + TABLE LAYOUT
 # ==================================================
 
-map_col, table_col = st.columns([2, 2])
+map_col, table_col = st.columns([3, 1])
 
 # ==================================================
 # MAP
@@ -275,6 +288,7 @@ with map_col:
             markers_to_plot[0][0],
             markers_to_plot[0][1]
         ]
+
         m.zoom_start = 14
 
     st_folium(
@@ -316,7 +330,6 @@ with table_col:
         st.info(
             "Input a coordinate or upload a file to view tabular results."
         )
-
 
 
 
