@@ -257,7 +257,7 @@ markers_to_plot = st.session_state.markers_to_plot
 # MAP + TABLE LAYOUT
 # ==================================================
 
-map_col, table_col = st.columns([3, 1])
+map_col, table_col = st.columns([2, 2])
 
 # ==================================================
 # TABLE
