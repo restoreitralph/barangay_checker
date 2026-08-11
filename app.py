@@ -308,8 +308,7 @@ with table_col:
 
         st.dataframe(
             results_df,
-            use_container_width=True,
-            height=750
+            use_container_width=True
         )
 
         csv_data = results_df.to_csv(
