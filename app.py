@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🇵🇭 Philippine Barangay Spatial Locator")
+st.title("Philippine Barangay Spatial Locator")
 
 st.markdown(
     """
@@ -243,7 +243,7 @@ markers_to_plot = st.session_state.markers_to_plot
 # MAP + TABLE LAYOUT
 # ==================================================
 
-map_col, table_col = st.columns([3, 1])
+map_col, table_col = st.columns([2, 2])
 
 # ==================================================
 # MAP
