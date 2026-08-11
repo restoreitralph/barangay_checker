@@ -21,8 +21,7 @@ st.title("Philippine Barangay Spatial Locator")
 st.markdown(
     """
     Enter a single coordinate or upload a CSV/XLSX file containing multiple coordinates
-    to identify their corresponding **Barangay, City, Province, Region, and ADM4_PCODE**
-    using your barangay boundary dataset.
+    to identify their corresponding **Barangay, City, Province, Region, and ADM4_PCODE**.
     """
 )
 
