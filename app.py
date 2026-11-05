@@ -118,7 +118,7 @@ basemap_name = st.sidebar.selectbox(
         "OpenTopoMap"
     ],
     index=0,
-    help="All available basemaps are configured without an API key."
+    help="Available basemaps you can choose."
 )
 
 
